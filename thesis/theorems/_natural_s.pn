@@ -1,0 +1,37 @@
+#load("../automata/mr_base.txt", "pecan", _D(d))
+#load("../automata/mr_recog.txt", "pecan", _U(d, x))
+#load("../automata/mr_add.txt", "pecan", _add(d,x,y,z))
+#load("../automata/mr_eq.txt", "pecan", _eq(x,y))
+#load("../automata/mr_less.txt", "pecan", _less(x,y))
+#load("../automata/mr_zero.txt", "pecan", _zero(x))
+#load("../automata/mr_one.txt", "pecan", _one(x))
+#load("../automata/period_doubling.txt", "pecan", _pd(n))
+#load("../automata/rudin_shapiro.txt", "pecan", _rs(n))
+#load("../automata/thue_morse.txt", "pecan", _tm(n))
+#load("../automata/weights.txt", "pecan", _we(n))
+
+Structure _U(d) defining {
+    "equal": _eq(any,any),
+    "adder": _add(d,any,any,any),
+    "less": _less(any,any),
+    "zero": _zero(any),
+    "one": _one(any)
+}
+
+_leq(x,y) := _less(x,y) | _eq(x,y)
+
+Theorem ("Addition is commutative", {
+    forall d is _D. forall x,y are _U(d). x+y = y+x
+}).
+
+Theorem ("Addition is associative", {
+    forall d is _D. forall x,y,z are _U(d). (x+y)+z=x+(y+z)
+}).
+
+Theorem ("Ordered monoid", {
+    forall d is _D. forall x,y,z is _U(d). if x<y then x+z<y+z
+}).
+
+Theorem ("Existence of predecessor", {
+    forall d is _D. forall x is _U(d). exists y is _U(d). if x!=0 then y+1=x
+}).

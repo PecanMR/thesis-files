@@ -1,0 +1,30 @@
+#load("../automata/mr_base.txt", "pecan", _D(d))
+#load("../automata/mr_recog.txt", "pecan", _U(d, x))
+#load("../automata/mr_add.txt", "pecan", _add(d,x,y,z))
+#load("../automata/mr_eq.txt", "pecan", _eq(x,y))
+#load("../automata/mr_less.txt", "pecan", _less(x,y))
+#load("../automata/mr_zero.txt", "pecan", _zero(x))
+#load("../automata/mr_one.txt", "pecan", _one(x))
+#load("../automata/period_doubling.txt", "pecan", _pd(n))
+#load("../automata/rudin_shapiro.txt", "pecan", _rs(n))
+#load("../automata/thue_morse.txt", "pecan", _tm(n))
+#load("../automata/weights.txt", "pecan", _we(n))
+
+Structure _U(d) defining {
+    "equal": _eq(any,any),
+    "adder": _add(d,any,any,any),
+    "less": _less(any,any),
+    "zero": _zero(any),
+    "one": _one(any)
+}
+
+_leq(x,y) := _less(x,y) | _eq(x,y)
+
+Theorem ("All Weights sequences are quasiperiodic", {
+    forall d is _D. 
+    exists n is _U(d).
+    !_zero(n) & forall i is _U(d). 
+    exists j,nj are _U(d).
+    _add(d,n,j,nj) & _less(i,nj) & _leq(j,i) & forall l,lj are _U(d).
+    if _less(l,n) & _add(d,l,j,lj) then (_we(l) iff _we(lj))
+}).
