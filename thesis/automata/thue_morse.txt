@@ -1,0 +1,26 @@
+{0,1,2}
+
+even_1: 0
+0 -> even_1
+1 -> even_2
+2 -> even_1
+
+even_2: 0
+0 -> even_2
+1 -> even_2
+2 -> odd_1
+2 -> final
+
+odd_1: 0
+0 -> odd_1
+1 -> odd_2
+2 -> odd_1
+
+odd_2: 0
+0 -> odd_2
+1 -> odd_2
+2 -> even_1
+
+final: 1
+0 -> final
+2 -> final

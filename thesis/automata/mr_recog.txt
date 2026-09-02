@@ -1,0 +1,38 @@
+{0,1,2} {0,1,2}
+
+start: 0
+2 2 -> final_1
+2 2 -> compare
+
+final_1: 0
+0 0 -> final_2
+1 0 -> final_2
+
+final_2: 0
+0 0 -> final_2
+1 0 -> final_2
+1 0 -> final_3
+
+final_3: 1
+2 2 -> final_1
+
+compare: 0
+0 0 -> leq
+0 1 -> leq
+1 0 -> gt
+1 1 -> leq
+
+gt: 0
+0 0 -> gt
+0 1 -> leq
+1 0 -> start
+1 0 -> gt
+1 1 -> start
+1 1 -> gt
+
+leq: 0
+0 0 -> leq
+0 1 -> leq
+1 0 -> start
+1 0 -> gt
+1 1 -> leq
